@@ -1,13 +1,50 @@
 package dev.jlaguna
 
-import io.ktor.server.application.*
-import io.ktor.server.response.*
-import io.ktor.server.routing.*
+import io.ktor.http.HttpStatusCode
+import io.ktor.server.application.Application
+import io.ktor.server.html.respondHtml
+import io.ktor.server.response.respondText
+import io.ktor.server.routing.get
+import io.ktor.server.routing.routing
+import kotlinx.html.a
+import kotlinx.html.body
+import kotlinx.html.div
+import kotlinx.html.h1
+import kotlinx.html.head
+import kotlinx.html.p
+import kotlinx.html.title
+
 
 fun Application.configureRouting() {
     routing {
         get("/") {
             call.respondText("Hello World!")
+        }
+
+        get("html") {
+            call.respondHtml(status = HttpStatusCode.OK) {
+                head {
+                    title { +"jLagunaDev Ktor" }
+                }
+                body {
+                    h1 { +"This is a h1" }
+                    p { +"This is a paragraph" }
+                    div {
+                        a(href = "html/clicked") { +"Click me!" }
+                    }
+                }
+            }
+        }
+
+        get("html/clicked") {
+            call.respondHtml(status = HttpStatusCode.OK) {
+                head {
+                    title { +"Clicked" }
+                }
+                body {
+                    h1 { +"Button Clicked!" }
+                }
+            }
         }
     }
 }
