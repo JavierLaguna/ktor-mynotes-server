@@ -1,8 +1,10 @@
 package dev.jlaguna
 
+import dev.jlaguna.repositories.NotesRepository
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.Application
 import io.ktor.server.html.respondHtml
+import io.ktor.server.response.respond
 import io.ktor.server.response.respondText
 import io.ktor.server.routing.Routing
 import io.ktor.server.routing.get
@@ -24,6 +26,12 @@ fun Application.configureRouting() {
         }
 
         htmlRoutes()
+
+        route("notes") {
+            get {
+                call.respond(NotesRepository.getAll())
+            }
+        }
     }
 }
 
