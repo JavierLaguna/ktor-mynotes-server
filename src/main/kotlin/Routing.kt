@@ -4,7 +4,9 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.Application
 import io.ktor.server.html.respondHtml
 import io.ktor.server.response.respondText
+import io.ktor.server.routing.Routing
 import io.ktor.server.routing.get
+import io.ktor.server.routing.route
 import io.ktor.server.routing.routing
 import kotlinx.html.a
 import kotlinx.html.body
@@ -21,7 +23,13 @@ fun Application.configureRouting() {
             call.respondText("Hello World!")
         }
 
-        get("html") {
+        htmlRoutes()
+    }
+}
+
+private fun Routing.htmlRoutes() {
+    route("html") {
+        get {
             call.respondHtml(status = HttpStatusCode.OK) {
                 head {
                     title { +"jLagunaDev Ktor" }
@@ -36,7 +44,7 @@ fun Application.configureRouting() {
             }
         }
 
-        get("html/clicked") {
+        get("clicked") {
             call.respondHtml(status = HttpStatusCode.OK) {
                 head {
                     title { +"Clicked" }
