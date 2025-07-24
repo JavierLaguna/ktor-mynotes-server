@@ -1,1 +1,1 @@
-rootProject.name = "mynotes-server"
+rootProject.name = "MyNotesKMP-Server"
