@@ -27,11 +27,7 @@ fun Application.configureRouting() {
 
         htmlRoutes()
 
-        route("notes") {
-            get {
-                call.respond(NotesRepository.getAll())
-            }
-        }
+        notesRoutes()
     }
 }
 
@@ -62,5 +58,20 @@ private fun Routing.htmlRoutes() {
                 }
             }
         }
+    }
+}
+
+private fun Routing.notesRoutes() {
+    route("notes") {
+        // CREATE
+
+        // READ
+        get {
+            call.respond(NotesRepository.getAll())
+        }
+
+        // UPDATE
+
+        // DELETE
     }
 }
