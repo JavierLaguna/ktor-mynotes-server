@@ -17,13 +17,13 @@ object NotesRepository {
 
     fun update(note: Note): Boolean  =
         list.indexOfFirst { it.id == note.id }
-            .takeIf { it > 0 }
+            .takeIf { it >= 0 }
             ?.also { list[it] = note }
             .let { it != null }
 
     fun delete(id: Long): Boolean =
         list.indexOfFirst { it.id == id }
-            .takeIf { it > 0 }
+            .takeIf { it >= 0 }
             ?.also(list::removeAt)
             .let { it != null }
 }
