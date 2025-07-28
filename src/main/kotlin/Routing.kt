@@ -70,6 +70,20 @@ private fun Routing.notesRoutes() {
             call.respond(NotesRepository.getAll())
         }
 
+        get("{id}") {
+            val id = call.parameters["id"] ?: return@get call.respond(
+                HttpStatusCode.BadRequest,
+                "Missing or invalid id"
+            )
+
+            val note = NotesRepository.getById(id.toLong()) ?: return@get call.respond(
+                HttpStatusCode.NotFound,
+                "Note not found with $id"
+            )
+
+            call.respond(note)
+        }
+
         // UPDATE
 
         // DELETE
